@@ -22,10 +22,12 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/api/**").authenticated())
-//            .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+            .authorizeHttpRequests((authorize) ->
+                    authorize.requestMatchers("/api/**").authenticated()
+            )
             .httpBasic(Customizer.withDefaults())
-            .formLogin(Customizer.withDefaults());
+            .formLogin(Customizer.withDefaults())
+            .cors(Customizer.withDefaults());
         return http.build();
     }
 

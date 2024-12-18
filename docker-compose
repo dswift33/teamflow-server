@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  db:
+    image: mysql:8
+    container_name: frosty_shaw
+    networks:
+      - teamflow-network
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_DATABASE: teamflow
+    ports:
+      - "3306:3306"
+
+  backend:
+    image: teamflow-backend
+    container_name: teamflow-backend
+    networks:
+      - teamflow-network
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://frosty_shaw:3306/teamflow
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: yourpassword
+
+networks:
+  teamflow-network:
